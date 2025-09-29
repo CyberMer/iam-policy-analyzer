@@ -1,0 +1,47 @@
+# IAM Policy Analyzer Configuration
+# This file allows you to customize the security rules and severity levels
+
+# Actions considered dangerous with their severity levels
+dangerous_actions:
+  "*": "critical"                    # Wildcard action - most dangerous
+  "iam:*": "critical"               # All IAM actions
+  "s3:*": "high"                    # All S3 actions
+  "ec2:*": "high"                   # All EC2 actions
+  "rds:*": "high"                   # All RDS actions
+  "iam:CreateRole": "high"          # Can create new roles
+  "iam:AttachRolePolicy": "high"    # Can attach policies to roles
+  "iam:PutRolePolicy": "high"       # Can put inline policies
+  "iam:CreateUser": "high"          # Can create new users
+  "sts:AssumeRole": "medium"        # Role assumption
+  "s3:GetBucketAcl": "medium"       # Read bucket ACLs
+  "s3:GetObjectAcl": "medium"       # Read object ACLs
+  "ec2:DescribeInstances": "low"    # Read EC2 instance info
+  "s3:ListBucket": "low"            # List S3 bucket contents
+
+# Resource patterns considered dangerous
+dangerous_resources:
+  - "*"                             # All resources
+  - "arn:aws:s3:::*"               # All S3 buckets
+  - "arn:aws:iam::*:*"             # All IAM resources
+  - "arn:aws:ec2:*:*:*"            # All EC2 resources
+
+# Actions that can lead to privilege escalation
+privilege_escalation_actions:
+  - "iam:CreateRole"
+  - "iam:AttachRolePolicy"
+  - "iam:PutRolePolicy"
+  - "iam:CreateUser"
+  - "iam:AttachUserPolicy"
+  - "iam:PutUserPolicy"
+  - "iam:CreateGroup"
+  - "iam:AttachGroupPolicy"
+  - "iam:AddUserToGroup"
+  - "sts:AssumeRole"
+
+# Sensitive actions that should always have conditions
+sensitive_actions_requiring_conditions:
+  - "sts:AssumeRole"
+  - "iam:*"
+  - "s3:*"
+  - "ec2:*"
+  - "rds:*"

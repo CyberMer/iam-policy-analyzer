@@ -1,0 +1,43 @@
+{
+  "dangerous_actions": {
+    "*": "critical",
+    "iam:*": "critical",
+    "s3:*": "high",
+    "ec2:*": "high",
+    "rds:*": "high",
+    "iam:CreateRole": "high",
+    "iam:AttachRolePolicy": "high",
+    "iam:PutRolePolicy": "high",
+    "iam:CreateUser": "high",
+    "sts:AssumeRole": "medium",
+    "s3:GetBucketAcl": "medium",
+    "s3:GetObjectAcl": "medium",
+    "ec2:DescribeInstances": "low",
+    "s3:ListBucket": "low"
+  },
+  "dangerous_resources": [
+    "*",
+    "arn:aws:s3:::*",
+    "arn:aws:iam::*:*",
+    "arn:aws:ec2:*:*:*"
+  ],
+  "privilege_escalation_actions": [
+    "iam:CreateRole",
+    "iam:AttachRolePolicy",
+    "iam:PutRolePolicy",
+    "iam:CreateUser",
+    "iam:AttachUserPolicy",
+    "iam:PutUserPolicy",
+    "iam:CreateGroup",
+    "iam:AttachGroupPolicy",
+    "iam:AddUserToGroup",
+    "sts:AssumeRole"
+  ],
+  "sensitive_actions_requiring_conditions": [
+    "sts:AssumeRole",
+    "iam:*",
+    "s3:*",
+    "ec2:*",
+    "rds:*"
+  ]
+}
