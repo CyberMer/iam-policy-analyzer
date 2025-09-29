@@ -2,8 +2,6 @@
 
 A simple Python tool that finds security problems in your AWS IAM policies. Think of it as a security guard that checks if your policies are too permissive or risky.
 
-## 🚀 Quick Start
-
 ### 1. Setup (one time)
 ```bash
 # Clone and go to the project
@@ -24,23 +22,23 @@ python simple_analyzer.py analyze -f examples/dangerous_policy.json
 python simple_analyzer.py analyze -f examples/good_policy.json
 ```
 
-## 🎯 What It Finds
+## What It Finds
 
-**🔴 Critical Issues**
+** Critical Issues**
 - Policies with `*` permissions (way too broad!)
 - Access to all resources with `*`
 
-**🟠 High Risk Issues**  
+** High Risk Issues**  
 - Dangerous actions like `iam:*`, `s3:*`, `ec2:*`
 - Actions that can create new users/roles (privilege escalation)
 
-**🟡 Medium Issues**
+** Medium Issues**
 - Missing security conditions on sensitive actions
 
-**🟢 Low Issues**
+** Low Issues**
 - Minor improvements and best practices
 
-## 📝 How to Use
+##  How to Use
 
 ### Analyze One Policy
 ```bash
@@ -95,68 +93,3 @@ Then use it:
 python simple_analyzer.py analyze -f policy.json --config config.yaml
 ```
 
-## 📁 What's in the Box
-
-```
-📦 iam-policies/
-├── 🐍 simple_analyzer.py    # Main tool
-├── 📁 src/                  # Core logic
-├── 📁 examples/             # Test policies
-├── ⚙️ config.yaml          # Example config
-├── 📋 requirements.txt      # Dependencies
-└── 🏃 run.sh               # Easy runner script
-```
-
-## 🆘 Quick Examples
-
-**Example 1: The Problem**
-```json
-{
-  "Effect": "Allow",
-  "Action": "*",
-  "Resource": "*"
-}
-```
-☝️ This gives access to EVERYTHING! The tool will flag this as CRITICAL.
-
-**Example 2: Much Better**
-```json
-{
-  "Effect": "Allow",
-  "Action": ["s3:GetObject", "s3:PutObject"],
-  "Resource": "arn:aws:s3:::my-specific-bucket/*"
-}
-```
-☝️ This is specific and safe. The tool will be happy! ✅
-
-## 🤝 Need Help?
-
-- Run `python simple_analyzer.py --help` for all options
-- Check the `examples/` folder for sample policies
-- The tool tells you exactly what's wrong and how to fix it
-
----
-
-*Keep your AWS policies secure! 🔒*
-
-## Security Checks
-
-- Wildcard permissions (*)
-- Cross-account trust relationships
-- Public access permissions
-- Privilege escalation paths
-- Unused permissions
-- Service-specific vulnerabilities
-- Compliance with security frameworks
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Run the test suite: `pytest`
-5. Submit a pull request
-
-## License
-
-MIT License
